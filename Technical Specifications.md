@@ -1,4 +1,5 @@
 - [Technical Specifications](#technical-specifications)
+  - [Graphical interface](#graphical-interface)
   - [🗃️ DATA Administration](#️-data-administration)
     - [Tables](#tables)
       - [GraphTypes](#graphtypes)
@@ -17,9 +18,13 @@
 
 # Technical Specifications
 
+## Graphical interface
+**tkinter** (include in Python).
+
 ## 🗃️ DATA Administration
-SQL LITE local database.
-Object Relational Model to interact with the data base.
+**SQLite** local database.
+
+**ORM SQLAlchemy** to interact with the data base.
 
 ### Tables
 

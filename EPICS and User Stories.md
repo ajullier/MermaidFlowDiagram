@@ -2,14 +2,11 @@
   - [EPIC 🏰 - Manage Files](#epic----manage-files)
     - [US 🧑‍💻 - View Created Files](#us----view-created-files)
       - [🧪 Aceptance Criteria (Done: ✅ / Pending: ⬜️)](#-aceptance-criteria-done---pending-️)
-      - [📝 Tasks (Done: ✅ / Pending: ⬜️)](#-tasks-done---pending-️)
   - [EPIC 🏰 - Create Files](#epic----create-files)
     - [US 🧑‍💻 - Create Files: Create a New Diagram File](#us----create-files-create-a-new-diagram-file)
       - [🧪 Aceptance Criteria (Done: ✅ / Pending: ⬜️)](#-aceptance-criteria-done---pending-️-1)
-      - [📝 Tasks (Done: ✅ / Pending: ⬜️)](#-tasks-done---pending-️-1)
     - [US 🧑‍💻 - Create Files: Select the GraphTypes](#us----create-files-select-the-graphtypes)
       - [🧪 Aceptance Criteria (Done: ✅ / Pending: ⬜️)](#-aceptance-criteria-done---pending-️-2)
-      - [📝 Tasks (Done: ✅ / Pending: ⬜️)](#-tasks-done---pending-️-2)
     - [US 🧑‍💻 - Create Files: Create Nodes](#us----create-files-create-nodes)
     - [US 🧑‍💻 - Create Files: Edit Nodes](#us----create-files-edit-nodes)
     - [US 🧑‍💻 - Create Files: Create Relationships](#us----create-files-create-relationships)
@@ -36,11 +33,6 @@
 #### 🧪 Aceptance Criteria (Done: ✅ / Pending: ⬜️)
 1. ⬜️ When the application starts, a list of diagrams names will be displayed.
 
-#### 📝 Tasks (Done: ✅ / Pending: ⬜️)
-1. ⬜️ Create all models.
-2. ⬜️ Create all controllers.
-3. ⬜️ Create View ListDiagrams.
-
 ## EPIC 🏰 - Create Files
 ### US 🧑‍💻 - Create Files: Create a New Diagram File
 **AS A** user **I WANT TO** create a new diagram file **SO THAT I** can document processes.
@@ -50,18 +42,11 @@
 2. ⬜️ The form will have the DiagramHeader model atributes as describe in the respective table.
 3. ⬜️ By clicking on SAVE, the diagram header will be saved in the database.
 
-#### 📝 Tasks (Done: ✅ / Pending: ⬜️)
-1. ⬜️ Create View -> addDiagramHeader
-
 ### US 🧑‍💻 - Create Files: Select the GraphTypes
 **AS A** user **I WANT TO** select an option of GraphTypes **SO THAT I** can indicate how to read the diagram.
 
 #### 🧪 Aceptance Criteria (Done: ✅ / Pending: ⬜️)
 1. ⬜️ In the addDiagramHeader view, add a select list to indicate wich Grap Types corresponds.
-
-#### 📝 Tasks (Done: ✅ / Pending: ⬜️)
-1. ⬜️ Create View -> addDiagramHeader
-2. ⬜️ By clicking on SAVE, the diagram header will and the asociated Graph Type.
 
 ### US 🧑‍💻 - Create Files: Create Nodes
 **AS A** user **I WANT TO** create nodes with a code, description, and shape (diamond, rectangle, circle) **SO THAT I** can later associate them in the diagram.
