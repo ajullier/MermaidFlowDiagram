@@ -356,6 +356,310 @@ class DiagramApp:
     def __del__(self):
         self.session.close()
 
+# ... (código anterior permanece igual hasta la línea 360)
+
+    def add_graph_type(self):
+        try:
+            code = self.gt_code.get()
+            description = self.gt_description.get()
+            
+            if not code or not description:
+                messagebox.showerror("Error", "Code and Description are required")
+                return
+                
+            new_gt = GraphType(Code=code, Description=description)
+            self.session.add(new_gt)
+            self.session.commit()
+            self.load_data()
+            self.gt_code.delete(0, 'end')
+            self.gt_description.delete(0, 'end')
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def update_graph_type(self):
+        selected = self.graph_type_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to update")
+            return
+            
+        try:
+            item = self.graph_type_tree.item(selected[0])
+            gt_id = item['values'][0]
+            
+            gt = self.session.query(GraphType).get(gt_id)
+            if gt:
+                gt.Code = self.gt_code.get()
+                gt.Description = self.gt_description.get()
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def delete_graph_type(self):
+        selected = self.graph_type_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to delete")
+            return
+            
+        try:
+            item = self.graph_type_tree.item(selected[0])
+            gt_id = item['values'][0]
+            
+            gt = self.session.query(GraphType).get(gt_id)
+            if gt:
+                self.session.delete(gt)
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def add_node(self):
+        try:
+            content = self.node_content.get()
+            alias = self.node_alias.get()
+            header_id = self.node_header.get().split(',')[0] if self.node_header.get() else None
+            figure_id = self.node_figure.get().split(',')[0] if self.node_figure.get() else None
+            
+            if not content:
+                messagebox.showerror("Error", "Content is required")
+                return
+                
+            new_node = Node(Content=content, Alias=alias, HeaderID=header_id, FigureID=figure_id)
+            self.session.add(new_node)
+            self.session.commit()
+            self.load_data()
+            self.node_content.delete(0, 'end')
+            self.node_alias.delete(0, 'end')
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def update_node(self):
+        selected = self.node_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to update")
+            return
+            
+        try:
+            item = self.node_tree.item(selected[0])
+            node_id = item['values'][0]
+            
+            node = self.session.query(Node).get(node_id)
+            if node:
+                node.Content = self.node_content.get()
+                node.Alias = self.node_alias.get()
+                header_id = self.node_header.get().split(',')[0] if self.node_header.get() else None
+                node.HeaderID = header_id
+                figure_id = self.node_figure.get().split(',')[0] if self.node_figure.get() else None
+                node.FigureID = figure_id
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def delete_node(self):
+        selected = self.node_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to delete")
+            return
+            
+        try:
+            item = self.node_tree.item(selected[0])
+            node_id = item['values'][0]
+            
+            node = self.session.query(Node).get(node_id)
+            if node:
+                self.session.delete(node)
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def add_figure(self):
+        try:
+            description = self.figure_description.get()
+            initial = self.figure_initial.get()
+            end = self.figure_end.get()
+            
+            if not description:
+                messagebox.showerror("Error", "Description is required")
+                return
+                
+            new_figure = Figure(Description=description, Initial=initial, End=end)
+            self.session.add(new_figure)
+            self.session.commit()
+            self.load_data()
+            self.figure_description.delete(0, 'end')
+            self.figure_initial.delete(0, 'end')
+            self.figure_end.delete(0, 'end')
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def update_figure(self):
+        selected = self.figure_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to update")
+            return
+            
+        try:
+            item = self.figure_tree.item(selected[0])
+            figure_id = item['values'][0]
+            
+            figure = self.session.query(Figure).get(figure_id)
+            if figure:
+                figure.Description = self.figure_description.get()
+                figure.Initial = self.figure_initial.get()
+                figure.End = self.figure_end.get()
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def delete_figure(self):
+        selected = self.figure_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to delete")
+            return
+            
+        try:
+            item = self.figure_tree.item(selected[0])
+            figure_id = item['values'][0]
+            
+            figure = self.session.query(Figure).get(figure_id)
+            if figure:
+                self.session.delete(figure)
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def add_message(self):
+        try:
+            description = self.message_description.get()
+            
+            if not description:
+                messagebox.showerror("Error", "Description is required")
+                return
+                
+            new_message = Message(Description=description)
+            self.session.add(new_message)
+            self.session.commit()
+            self.load_data()
+            self.message_description.delete(0, 'end')
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def update_message(self):
+        selected = self.message_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to update")
+            return
+            
+        try:
+            item = self.message_tree.item(selected[0])
+            message_id = item['values'][0]
+            
+            message = self.session.query(Message).get(message_id)
+            if message:
+                message.Description = self.message_description.get()
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def delete_message(self):
+        selected = self.message_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to delete")
+            return
+            
+        try:
+            item = self.message_tree.item(selected[0])
+            message_id = item['values'][0]
+            
+            message = self.session.query(Message).get(message_id)
+            if message:
+                self.session.delete(message)
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def add_relationship(self):
+        try:
+            input_id = self.rel_input.get().split(',')[0] if self.rel_input.get() else None
+            output_id = self.rel_output.get().split(',')[0] if self.rel_output.get() else None
+            message_id = self.rel_message.get().split(',')[0] if self.rel_message.get() else None
+            
+            if not input_id or not output_id:
+                messagebox.showerror("Error", "Input and Output nodes are required")
+                return
+                
+            new_rel = Relationship(Input=input_id, Output=output_id, MessageID=message_id)
+            self.session.add(new_rel)
+            self.session.commit()
+            self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def update_relationship(self):
+        selected = self.relationship_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to update")
+            return
+            
+        try:
+            item = self.relationship_tree.item(selected[0])
+            rel_id = item['values'][0]
+            
+            rel = self.session.query(Relationship).get(rel_id)
+            if rel:
+                input_id = self.rel_input.get().split(',')[0] if self.rel_input.get() else None
+                rel.Input = input_id
+                output_id = self.rel_output.get().split(',')[0] if self.rel_output.get() else None
+                rel.Output = output_id
+                message_id = self.rel_message.get().split(',')[0] if self.rel_message.get() else None
+                rel.MessageID = message_id
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def delete_relationship(self):
+        selected = self.relationship_tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "Please select a record to delete")
+            return
+            
+        try:
+            item = self.relationship_tree.item(selected[0])
+            rel_id = item['values'][0]
+            
+            rel = self.session.query(Relationship).get(rel_id)
+            if rel:
+                self.session.delete(rel)
+                self.session.commit()
+                self.load_data()
+        except Exception as e:
+            self.session.rollback()
+            messagebox.showerror("Error", str(e))
+
+    def __del__(self):
+        self.session.close()
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = DiagramApp(root)
